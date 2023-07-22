@@ -1,4 +1,21 @@
 # Runtime configuration for Synapse and settings related to the Matrix protocol
+
+db:
+  host:
+  port:
+  name:
+  user:
+  pass:
+
+redis:
+  host: localhost
+  password: <secret_password>
+
+captcha:
+  enabled: "true"
+  siteKey:
+  secretKey:
+
 matrix:
   # Manual overrides for homeserver.yaml, the main configuration file for Synapse
   # If homeserverOverride is set, the entirety of homeserver.yaml will be replaced with the contents.
@@ -106,9 +123,9 @@ matrix:
     allowGuests: false
 
     # Required "3PIDs" - third-party identifiers such as email or msisdn (SMS)
-    # required3Pids:
-    #   - email
-    #   - msisdn
+    required3Pids:
+      - email
+      - msisdn
 
     # Rooms to automatically join all new users to
     autoJoinRooms: []

@@ -231,6 +231,15 @@ hs_disabled_message: {{ .Values.matrix.disabledMessage }}
 redaction_retention_period: {{ .Values.matrix.retentionPeriod }}
 
 
+redis:
+    host: "{{ .Values.redis.host }}"
+    port: 6379
+    password: "{{ .Values.redis.password }}"
+
+recaptcha_public_key: "{{ .Values.captcha.siteKey }}"
+recaptcha_private_key: "{{ .Values.captcha.secretKey }}"
+enable_registration_captcha: {{ .Values.captcha.enabled }}
+
 ## Database ##
 
 database:
@@ -238,18 +247,13 @@ database:
     name: "psycopg2"
     # Arguments to pass to the engine
     args:
-        user: "{{ .Values.postgresql.username }}"
-        password: "{{ .Values.postgresql.password }}"
-        database: "{{ .Values.postgresql.database }}"
+        user: "{{ .Values.db.user }}"
+        password: "{{ .Values.db.password }}"
+        database: "{{ .Values.db.name }}"
 
-        {{- if .Values.postgresql.enabled }}
-        host: "{{ include "matrix.fullname" . }}-postgresql"
-        port: "5432"
-        {{- else }}
-        host: "{{ .Values.postgresql.hostname }}"
-        port: "{{ .Values.postgresql.port }}"
-        {{- end }}
-        sslmode: {{ .Values.postgresql.sslMode }}
+        host: "{{ .Values.db.host }}"
+        port: "{{ .Values.db.port }}"
+
         cp_min: 5
         cp_max: 10
 
